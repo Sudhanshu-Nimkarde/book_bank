@@ -15,8 +15,13 @@ return new class extends Migration
         Schema::create('giveaway_request', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->date('date')->default(DB::raw('CURRENT_DATE'));
+
+            // FIX: use datetime instead of date (CURRENT_DATE not supported)
+            $table->dateTime('date')->default(DB::raw('CURRENT_TIMESTAMP'));
+
+            // FIX: make sure this references "donations" table
             $table->foreignId('donation_id')->constrained('donation')->onDelete('cascade');
+
             $table->string('status')->default('Applied');
             $table->timestamps();
         });

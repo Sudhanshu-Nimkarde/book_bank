@@ -5,7 +5,6 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 
-
 return new class extends Migration
 {
     /**
@@ -17,7 +16,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('book_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->date('date')->default(DB::raw('CURRENT_DATE'));
+            
+            // FIX: make it datetime with default current timestamp
+            $table->dateTime('date')->default(DB::raw('CURRENT_TIMESTAMP'));
+            
             $table->string('status')->default('Rejected');
             $table->timestamps();
         });

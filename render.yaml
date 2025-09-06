@@ -3,7 +3,7 @@ services:
     name: book-bank
     env: docker
     plan: free
-    dockerfilePath: ./Dockerfile
+    dockerfilePath:  Dockerfile
     autoDeploy: true
     envVars:
       - key: APP_ENV
